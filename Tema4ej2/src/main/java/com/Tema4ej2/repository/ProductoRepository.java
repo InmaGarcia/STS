@@ -21,12 +21,13 @@ public class ProductoRepository {
 	public List<Producto> getProductos(){
 		Query<Producto> query = (Query<Producto>) puente.createQuery("select p from Producto p", Producto.class);
 		List<Producto> lista = query.getResultList();
+		//return puente.createQuery("FROM producto",Producto.class).getResultList();
 		return lista;
 	}
 	
 	public Producto getProducto(Integer id) {
-		Producto p = puente.find(Producto.class, id);
-		return p;
+		return puente.find(Producto.class, id);
+		
 	}
 	
 	public Producto crearProducto(Producto p) {
@@ -59,7 +60,7 @@ public class ProductoRepository {
 	}
 	
 	public List<Producto> getProductoPrecio(Float precio1, Float precio2){
-		String jpql = "SELECT p FROM Producto p WHERE p.precio BETWEEN precio1 AND precio2";
+		String jpql = "SELECT p FROM Producto p WHERE p.precio BETWEEN :precio1 AND precio2";
 		Query<Producto> query = (Query<Producto>) puente.createQuery(jpql, Producto.class);
 		
 		query.setParameter("precio1",precio1);
@@ -69,7 +70,11 @@ public class ProductoRepository {
 	
 	public List<Producto> insertaLista(List<Producto> productos){
 		for(Producto p : productos) {
+			if(puente.contains(p)) {
+				actualizar(p);
+			}else {
 			crearProducto(p);
+			}
 		}
 		return productos;
 	}

@@ -46,11 +46,8 @@ public class ProductoController {
 	@PostMapping
 	public ResponseEntity<Producto> crearProducto(@RequestBody Producto p){
 		Producto nuevo = service.crearProducto(p);
-		if(nuevo == null) {
-			return ResponseEntity.notFound().build();
-		}else {
-			return ResponseEntity.ok(p);
-		}
+			return ResponseEntity.noContent().build();
+		
 	}
 	
 	//actualizar total
