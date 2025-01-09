@@ -21,6 +21,10 @@ public interface Repositorio {
 	public Direccion getDireccion(Integer id);
 	//actualizar direccion
 	public void actualizarDireccion(Direccion d);
-	//Lista de direcciones
-	public List<Direccion> getDirecciones();
+	//
+	public List<Cliente> buscarA();
+	//
+	public List<Cliente> buscarNombresPorLetra(String letra);
+	//
+	public List<Cliente> buscarPorCiudad(String ciudad);
 }

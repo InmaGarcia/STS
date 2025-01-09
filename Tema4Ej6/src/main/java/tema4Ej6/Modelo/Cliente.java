@@ -21,15 +21,21 @@ public class Cliente {
 	private String nombre;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name ="direccion_id")
-	private Integer direccionId;
+	private Direccion direccion;
 	
 	
-	public Cliente(Integer id, String nombre, Integer direccionId) {
+	public Cliente(String nombre, Direccion direccion) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
-		this.direccionId = direccionId;
+		this.direccion = direccion;
 	}
+ 
+	
+
+	public Cliente() {
+		super();
+	}
+
 
 
 	public Integer getId() {
@@ -52,13 +58,13 @@ public class Cliente {
 	}
 
 
-	public Integer getDireccionId() {
-		return direccionId;
+	public Direccion getDireccion() {
+		return direccion;
 	}
 
 
-	public void setDireccionId(Integer direccionId) {
-		this.direccionId = direccionId;
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
 	}
 	
 	

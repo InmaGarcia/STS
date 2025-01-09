@@ -79,26 +79,18 @@ public class Controlador {
 	}
 	
 	@PatchMapping("/Sevilla")
-	public ResponseEntity<List<Cliente>> actualizarSevilla(){
-		List<Cliente> lista = service.actualizarSevilla();
-		if(lista.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}else {
-			return ResponseEntity.ok(lista);
-		}
+	public ResponseEntity<Void> actualizarSevilla(){
+		service.actualizarSevilla();
+		return ResponseEntity.noContent().build();
 	}
 	
 	@PatchMapping("/{inicial}/direccion/{nuevaCiudad}")
-	public ResponseEntity<List<Cliente>> actualizarCiudad(@PathVariable String inicial, String nuevaCiudad){
-		List<Cliente> lista = service.actualizarCiudad(inicial, nuevaCiudad);
-		if(lista.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}else {
-			return ResponseEntity.ok(lista);
-		}
+	public ResponseEntity<Void> actualizarCiudad(@PathVariable String inicial, String nuevaCiudad){
+		service.actualizarCiudadNombre(inicial, nuevaCiudad);
+		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/Ciudad/{ciudad}")
+	@GetMapping("/buscarCiudad/{ciudad}")
 	public ResponseEntity<List<Cliente>> getClientePorCliudad(@PathVariable String ciudad){
 		List<Cliente> lista = service.getClientesPorCiudad(ciudad);
 		

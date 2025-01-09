@@ -32,21 +32,20 @@ public class ServicioImp implements Servicio {
 		}
 		
 		@Transactional
-		public Cliente actualizar(Cliente c){
-			List<Cliente> lista = repo.getClientes();
-			for(Cliente cliente : lista) {
-				if(cliente.getId() == c.getId()) {
-					if(c.getNombre()!= null) {
-						cliente.setNombre(c.getNombre());
-					}
-					if(c.getDireccionId()!=null) {
-						cliente.setDireccionId(c.getDireccionId());
-					}
-					repo.actualizar(cliente);
+		public Cliente actualizar(Cliente c, Direccion nueva){
+
+			
+			Cliente cliente = repo.getCliente(c.getId());
+			if (cliente != null) {
+				if (nueva != null) {
+					nueva.setId(cliente.getDireccion().getId());
+					cliente.setDireccion(nueva);
+					repo.crear(cliente);
 					return cliente;
 				}
 			}
 			return null;
+
 			
 		}
 	
@@ -59,58 +58,49 @@ public class ServicioImp implements Servicio {
 		public Cliente actualizarDireccion(Integer id, Direccion d) {
 			Cliente c = repo.getCliente(id);
 			if(c!=null) {
-				d.setId(c.getDireccionId());
+				if (d != null) {
+					d.setId(c.getDireccion().getId());
+					c.setDireccion(d);
+					repo.actualizar(c);
+					return c;
+				}
+
 			}
-			repo.actualizarDireccion(d);
-			return c;
+			return null;
 		}
 		
 		@Transactional
-		public List<Cliente> actualizarSevilla(){
-			List<Cliente> clientes= repo.getClientes();
-			List<Cliente> modificados = new ArrayList<>();
-			for(Cliente cliente:clientes){
-				if(cliente.getNombre().substring(0, 1).equalsIgnoreCase("A")) {
-					Direccion d = repo.getDireccion(cliente.getDireccionId());
-					d.setCiudad("Sevilla");
-					repo.actualizarDireccion(d);
-					modificados.add(cliente);
-				}
-			}
-			return modificados;
+		public void actualizarSevilla(){
+			List<Cliente> clientes = repo.buscarA();
+	        for (Cliente cliente : clientes) {
+	            if (cliente.getDireccion() != null) {
+	                cliente.getDireccion().setCiudad("Sevilla");
+	                repo.actualizar(cliente);
+	            }
+	        }
+
 		}
 		
 		@Transactional
-		public List<Cliente> actualizarCiudad(String ciudad, String letra){
-			List<Cliente> clientes= repo.getClientes();
-			List<Cliente> modificados = new ArrayList<>();
+		public void actualizarCiudadNombre(String ciudad, String letra){
+			List<Cliente> clientes= repo.buscarNombresPorLetra(letra);
 			for(Cliente cliente:clientes){
-				if(cliente.getNombre().substring(0, 1).equalsIgnoreCase(letra)) {
-					Direccion d = repo.getDireccion(cliente.getDireccionId());
-					d.setCiudad(ciudad);
-					repo.actualizarDireccion(d);
-					modificados.add(cliente);
-				}
+				if (cliente.getDireccion() != null) {
+	                cliente.getDireccion().setCiudad(ciudad);
+	                repo.actualizar(cliente);
+	            }
+
 			}
-			return modificados;
 		}
 		
 		@Transactional
 		public List<Cliente> getClientesPorCiudad(String ciudad){
-			List<Direccion> direcciones = repo.getDirecciones();
-			List<Integer> idDirecciones = new ArrayList<>();
-			for(Direccion direccion:direcciones) {
-				if(direccion.getCiudad().equalsIgnoreCase(ciudad)) {
-					idDirecciones.add(direccion.getId());
-				}
-			}
-			List<Cliente> clientes = repo.getClientes();
-			List<Cliente> busqueda = new ArrayList<>();
-			for(Cliente cliente : clientes) {
-				if(idDirecciones.contains(cliente.getDireccionId())) {
-					busqueda.add(cliente);
-				}
-			}
-			return busqueda;
+			 return repo.buscarPorCiudad(ciudad);
+		}
+
+		@Override
+		public Cliente actualizar(Cliente c) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

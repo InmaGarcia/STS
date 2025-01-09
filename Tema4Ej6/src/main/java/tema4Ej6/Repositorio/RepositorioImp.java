@@ -57,7 +57,32 @@ public class RepositorioImp implements Repositorio {
 	}
 	
 	@Override
-	public List<Direccion> getDirecciones() {
-		return puente.createQuery("select d from Direccion d", Direccion.class).getResultList();
+	public List<Cliente> buscarA(){
+		 return puente.createQuery("SELECT c FROM Cliente c WHERE c.nombre LIKE :prefijo", Cliente.class)
+         .setParameter("prefijo", "A" + "%")
+         .getResultList();
 	}
+	
+	@Override
+	public List<Cliente> buscarNombresPorLetra(String letra){
+		
+		System.out.println("la letra es " + letra);
+		 return puente.createQuery("SELECT c FROM Cliente c WHERE c.nombre LIKE :prefix", Cliente.class)
+        .setParameter("prefix", letra + "%")
+        .getResultList();
+	}
+
+	
+	@Override
+	 public List<Cliente> buscarPorCiudad(String ciudad) {
+		
+	        String query = "SELECT c FROM Cliente c WHERE c.direccion.ciudad = :ciudad";
+	        return puente.createQuery(query, Cliente.class)
+	                            .setParameter("ciudad", ciudad)
+	                            .getResultList();
+	    
+		
+	    }
+
+
 }

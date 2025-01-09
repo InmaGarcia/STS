@@ -19,9 +19,10 @@ public interface Servicio {
 	
 	public Cliente actualizarDireccion(Integer id, Direccion d);
 	
-	public List<Cliente> actualizarSevilla();
+	public void actualizarSevilla();
 	
-	public List<Cliente> actualizarCiudad(String ciudad, String letra);
+	public void actualizarCiudadNombre(String ciudad, String letra);
 	
 	public List<Cliente> getClientesPorCiudad(String ciudad);
+
 }

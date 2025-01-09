@@ -19,12 +19,17 @@ public class Direccion {
 	@Column
 	private String ciudad;
 	
-	public Direccion(Integer id, String calle, String ciudad) {
+	public Direccion(String calle, String ciudad) {
 		super();
-		this.id = id;
 		this.calle = calle;
 		this.ciudad = ciudad;
 	}
+
+	
+	public Direccion() {
+		super();
+	}
+
 
 	public Integer getId() {
 		return id;
