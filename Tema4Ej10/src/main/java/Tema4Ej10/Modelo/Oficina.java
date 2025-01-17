@@ -21,7 +21,7 @@ public class Oficina {
 	 	@Column
 	    private String telefono;
 
-	    @OneToMany(mappedBy = "oficina", cascade = CascadeType.ALL)
+	    @OneToMany(mappedBy = "oficina")
 	    private List<Empleado> empleados;
 
 		public Oficina(Integer id, String ubicacion, String telefono, List<Empleado> empleados) {
