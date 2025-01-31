@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Mensaje de inicio</title>
+</head>
+<body>
+	<h1 th:text="${mensaje}">Texto por defecto</h1>
+	<p th:text="'Hola, ' + ${nombre1}">Texto de ejemplo</p>
+	<p th:utext="'Hola, ' + ${nombre2}">Texto de ejemplo</p>
+	<img th:src="@{./BLANCANIEVES.jpg}" alt="logo">
+	<br>
+	<a th:href="@{/index}">Ir a Index</a>
+	
+	
+	<p th:if="${role == 'admin'}">Es administrador</p>
+	<p th:unless="${role== 'admin'}">No es administrador</p>
+	
+	<ul>
+ 	<li th:each="nombre: ${nombres}" th:text="${nombre}"></li>
+ 	<br>
+ 	<a th:href="@{/form}">Ir al formulario</a>
+</ul>
+</body>
+</html>
