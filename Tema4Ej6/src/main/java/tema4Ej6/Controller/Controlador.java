@@ -25,7 +25,7 @@ public class Controlador {
 	@Autowired
 	private Servicio service;
 	
-	@GetMapping
+	@GetMapping("/todos")
 	public ResponseEntity<List<Cliente>> getClientes(){
 		List<Cliente> lista = service.getClientes();
 		return ResponseEntity.ok(lista);
