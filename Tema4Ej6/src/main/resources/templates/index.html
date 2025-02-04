@@ -19,12 +19,12 @@
 		    <tr th:each="cliente : ${clientes}">
 		        <td th:text="${cliente.id}"></td>
 		        <td th:text="${cliente.nombre}"></td>
-		        <td th:text="${cliente.ciudad}"></td>
-		        <td><a th:href="@{/clientedetalle/{id}(id=${cliente.id})}">Ver</a></td>
+		        <td th:text="${cliente.direccion.ciudad}"></td>
+		       <td><a th:href="@{/clientes/detalles/{id}(id=${cliente.id})}">Ver</a></td>
 		    </tr>
 		</tbody>
 	</table>
-	<a href="@{/formulario}">Agregar cliente</a>
-    <a href="@{/ciudad}">Buscar por provincia</a>
+	<a th:href="@{/clientes/formulario}">Agregar cliente</a>
+    <a th:href="@{/clientes/ciudad}">Buscar por provincia</a>
 </body>
 </html>

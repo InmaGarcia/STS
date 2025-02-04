@@ -7,14 +7,17 @@
 <body>
     <h1>Agregar Cliente</h1>
 
-    <form action="/guardarCliente" method="post">
-        <label>Nombre: <input type="text" name="nombre" required></label><br><br>
-        <label>Calle: <input type="text" name="calle" required></label><br><br>
-        <label>Ciudad: <input type="text" name="ciudad" required></label><br><br>
+    <form th:action="@{/clientes/guardarCliente}" th:object="${cliente}"  method="post">
+        <label>Nombre:</label> 
+        <input type="text" th:field="*{nombre}" required/><br><br>
+        <label>Calle:</label> 
+        <input type="text" th:field="*{direccion.calle}" required/><br><br>
+        <label>Ciudad:</label> 
+        <input type="text" th:field="*{direccion.ciudad}" required/><br><br>
         <button type="submit">Guardar</button>
     </form>
     
     <br>
-    <a href="@{/clientes}">Volver al listado</a>
+    <a th:href="@{/clientes}">Volver al listado</a>
 </body>
 </html>
