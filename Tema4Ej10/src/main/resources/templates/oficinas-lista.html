@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Lista de Oficinas</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>UBICACION</th>
+				<th>TELEFONO</th>
+				<th>ACCIONES</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="ofi :${oficinas}">
+				<td th:text="${ofi.ubicacion}"></td>
+				<td th:text="${ofi.telefono}"></td>
+				<td><a th:href="@{/empleados/oficina/{id}(id=${ofi.id})}" >
+                        Ver empleados
+                    </a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div th:if="${listaEmp != null}">
+        <h2>Empleados</h2>
+        <ul th:each="emp:${listaEmp}">
+            <li  th:text="${emp.nombre} + ' (' + ${emp.puesto} + ')'"></li>
+        </ul>
+    </div>
+
+    <a th:href="@{/oficina-form}">Añadir Nueva Oficina</a>
+</body>
+</html>
