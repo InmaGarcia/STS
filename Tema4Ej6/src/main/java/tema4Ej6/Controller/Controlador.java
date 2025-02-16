@@ -18,8 +18,10 @@ import tema4Ej6.Modelo.Cliente;
 import tema4Ej6.Modelo.Direccion;
 import tema4Ej6.Servicio.Servicio;
 
+
 @RestController
 @RequestMapping("/clientes")
+
 public class Controlador {
 	
 	@Autowired
@@ -30,6 +32,8 @@ public class Controlador {
 		List<Cliente> lista = service.getClientes();
 		return ResponseEntity.ok(lista);
 	}
+	
+	
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getCliente(@PathVariable Integer id){
