@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Alta Curso</title>
+</head>
+<body>
+	<form th:action="@{/cursos/guardar}" th:object="${curso}" method="post">
+		<label>Nombre:</label>
+		<input type="text" th:field="*{nombre}">
+		<label>Descripcion:</label>
+		<input type="text" th:field="*{descripcion}">
+		
+		<button type="submit">Guardar</button>
+	</form>
+
+</body>
+</html>

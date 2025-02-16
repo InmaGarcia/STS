@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Deportes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="deportista: ${deportistas}">
+				<td th:text="${deportista.nombre}"></td>
+				<td>
+					<ul th:each="deporte: ${deportista.deportes}">
+						<li th:text="${deporte.nombre}"></li>
+					</ul>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/deportistas/altaDeportista}">Alta Deportista</a>
+	<a th:href="@{/deportistas/deportes}">Lista deportes</a>
+</body>
+</html>

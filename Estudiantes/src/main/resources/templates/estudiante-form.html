@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Dar de alta Estudiante</title>
+</head>
+<body>
+	<form th:action="@{/estudiantes/guardar}" th:object="${estudiante}"
+		method="post">
+		<label>Nombre:</label> <input type="text" th:field="*{nombre}"><br>
+		<label>Email:</label> <input type="text" th:field="*{email}"><br>
+		<label>Cursos:</label> <select th:field="*{cursos}" multiple>
+			<div th:each="curso: ${cursos}">
+				<option th:value="${curso.nombre}" th:selected="${curso.id}"
+					th:text="${curso.nombre}"></option>
+			</div>
+		</select>
+
+		<button type="submit">Guardar</button>
+	</form>
+</body>
+</html>
