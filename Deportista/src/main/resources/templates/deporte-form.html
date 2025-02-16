@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/deportistas/guardarDeporte}" th:object="${deporte}" method="post">
+		<label>Nombre:</label>
+		<input type="text" th:field="*{nombre}"><br>
+		<label>Deportistas:</label>
+		<div th:each="deportista : ${deportistas}">
+		<input type="checkbox" name="lista" th:value ="${deportista.id}" th:text="${deportista.nombre}">
+		</div>
+		<button type="submit">Guardar</button>
+				
+	</form>
+</body>
+</html>
